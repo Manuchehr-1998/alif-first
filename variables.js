@@ -1,50 +1,42 @@
-// Функция управления запасами на складе
 function manageStock() {
-  // Переменная с использованием var для текущего запаса товаров
-  var currentStock = 100; // Начальное количество товаров на складе
+  var currentStock = 100;
 
-  // Переменная с использованием let для количества товаров, поступивших за день
-  let dailyArrival = 0; // Начальное количество поступивших товаров за день
+  let dailyArrival = 0;
 
-  // Константа с использованием const для максимальной емкости склада
-  const maxCapacity = 500; // Максимальное количество товаров на складе
+  const maxCapacity = 500;
 
-  // Функция для поступления новых товаров
   function addStock(amount) {
-    dailyArrival += amount; // Увеличиваем количество поступивших товаров
+    dailyArrival += amount;
+
     if (currentStock + dailyArrival > maxCapacity) {
       throw new Error("Ошибка: Превышен максимальный запас на складе!");
     }
-    currentStock += dailyArrival; // Обновляем текущий запас товаров
+    currentStock += dailyArrival;
     console.log(`Товары добавлены: ${amount}. Текущий запас: ${currentStock}.`);
-    dailyArrival = 0; // Сбрасываем количество поступивших товаров
+    dailyArrival = 0;
   }
 
-  // Функция для продажи товаров
   function sellStock(amount) {
     if (amount > currentStock) {
       throw new Error("Ошибка: Недостаточно товаров на складе!");
     }
-    currentStock -= amount; // Уменьшаем текущий запас товаров
+    currentStock -= amount;
     console.log(`Товары проданы: ${amount}. Текущий запас: ${currentStock}.`);
   }
 
-  // Функция для отображения текущего запаса и максимальной емкости
   function displayStock() {
     console.log(`Текущий запас на складе: ${currentStock}`);
     console.log(`Максимальная емкость склада: ${maxCapacity}`);
   }
 
-  // Примеры использования функций
   try {
-    addStock(150); // Добавляем 150 товаров
-    sellStock(50); // Продаем 50 товаров
-    displayStock(); // Показываем текущий запас и максимальную емкость
-    addStock(300); // Добавляем 300 товаров (вызывает ошибку)
+    addStock(150);
+    sellStock(50);
+    displayStock();
+    addStock(300);
   } catch (error) {
     console.error(error.message);
   }
 }
 
-// Запуск функции управления запасами
 manageStock();
